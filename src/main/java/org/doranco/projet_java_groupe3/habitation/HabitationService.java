@@ -34,20 +34,20 @@ public class HabitationService implements IHabitationService {
     }
 
     @Override
-    public Habitation detailsHabitation(String ref) throws Exception {
+    public Habitation detailsHabitation(String id) throws Exception {
 
-        Optional<Habitation> habitationOptional = habitationRepository.findById(ref);
+        Optional<Habitation> habitationOptional = habitationRepository.findById(id);
         if (habitationOptional.isPresent()) {
             return habitationOptional.get();
         } else {
-            throw new RuntimeException("Aucune habitation trouvée");
+            throw new RuntimeException("Aucune habitation trouvée.");
         }
     }
 
     @Override
-    public String supprimerHabitation(String ref) throws Exception {
+    public String supprimerHabitation(String id) throws Exception {
 
-        habitationRepository.deleteById(ref);
+        habitationRepository.deleteById(id);
         return "L'habitation a bien été supprimée";
     }
 
@@ -68,9 +68,9 @@ public class HabitationService implements IHabitationService {
     }
 
     @Override
-    public Habitation selectionnerHabitation(String ref) throws Exception {
+    public Habitation selectionnerHabitation(String id) throws Exception {
         
-        Optional<Habitation> habitationOptional = habitationRepository.findById(ref);
+        Optional<Habitation> habitationOptional = habitationRepository.findById(id);
         if (habitationOptional.isPresent()) {
             return habitationOptional.get();
         } else {

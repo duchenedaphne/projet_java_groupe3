@@ -15,6 +15,8 @@ public class Document {
     
     @Id @Column(length = 30)
     private String id;
+
+    private String nom;
     private EnumDocument type;
 
 }
