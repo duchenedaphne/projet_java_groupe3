@@ -34,7 +34,9 @@ public class HabitationRestController {
     }
 
     @PostMapping("/poster")
-    public Habitation saveHabitation(@RequestBody Habitation habitation) {
+    public Habitation saveHabitation(
+        @RequestBody Habitation habitation
+        ) {
         Habitation habitation2 = null;
         try {
             habitation2 = habitationService.ajouterHabitation(habitation);
