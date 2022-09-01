@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html 
-    lang="en"
+    lang="fr"
     xmlns:th="http://thymeleaf.org"
     xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout"
     layout:decorate="template"
@@ -34,16 +34,18 @@
                             <td th:text="${h.departement}"> </td>
                             <td th:text="${h.superficie}"> </td>
                             <td th:text="${h.prix}"></td>
-                            <td>
-                                <button onclick="/habitations/update/${h.id}">Modifier</button>
-                                <button><a href="/habitations/delete/${h.id}">Supprimer</a></button>
+                            <td>            
+                                <button>
+                                    <a th:href="@{habitations/update/{id}(id=${h.id})}">Modifier</a>
+                                </button>         
+                                <button>
+                                    <a th:href="@{habitations/delete/{id}(id=${h.id})}">Supprimer</a>
+                                </button> 
                             </td>
                         </tr>
                     </table>
                     
-                    <!--  th:object="h:${habitation}" -->
-                    <h3>Ajouter une habitation :</h3>
-                    
+                    <h3>Ajouter une habitation :</h3>                    
                     <form th:action="@{habitations/save}" method="post">
                         <div class="form-group">
                             <label for="id">Id :</label>

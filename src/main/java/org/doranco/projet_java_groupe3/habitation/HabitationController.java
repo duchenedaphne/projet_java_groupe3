@@ -1,7 +1,5 @@
 package org.doranco.projet_java_groupe3.habitation;
 
-import javax.validation.Valid;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -10,10 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller 
 @RequestMapping("/habitations")
@@ -37,6 +34,7 @@ public class HabitationController {
             model.addAttribute("pages", new int[habitations.getTotalPages()]);
             model.addAttribute("current_page", page);
             model.addAttribute("habitation", new Habitation());
+
         } catch (Exception e) {
             model.addAttribute("error",e.getMessage());
             throw new RuntimeException(e);
@@ -55,26 +53,41 @@ public class HabitationController {
             throw new RuntimeException(e);
         }
         return "redirect:/habitations";
-
     }
 
-    @GetMapping(path= "update/{id}", produces = "application/json")
-    public String updateHabitation(
-        @PathVariable String id
+    @RequestMapping(path="update/{id}")
+    public ModelAndView updateHabitation(
+        @PathVariable(name = "id") String id
     ) {
         try {
-            habitationService.detailsHabitation(id);
+            ModelAndView modelAndView = new ModelAndView("hupdate");
+
+            Habitation habitation = habitationService.detailsHabitation(id);
+            modelAndView.addObject("habitation", habitation);
+
+            return modelAndView;
             
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "habitations/{id}";
-
+    }
+    
+    @PostMapping(path= "update/save",produces = "application/json")
+    public String updateHabitation(
+        @ModelAttribute("habitation") Habitation habitation
+    ) {
+        try {
+            habitationService.ajouterHabitation(habitation);
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "redirect:/habitations";
     }
 
-    @GetMapping(path= "delete/{id}")
+    @RequestMapping(path = "delete/{id}")
     public String deleteHabitation(
-        @PathVariable String id
+        @PathVariable(name = "id") String id
     ) {
         try {
             habitationService.supprimerHabitation(id);
@@ -83,6 +96,6 @@ public class HabitationController {
             throw new RuntimeException(e);
         }
         return "redirect:/habitations";
-
     }
+
 }
