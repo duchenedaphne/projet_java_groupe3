@@ -32,7 +32,9 @@ public class Habitation {
     private String latitude;
     private String etat;
 
+    private String photo;
+/*
     @OneToMany(mappedBy = "habitation")
     private List<Photo> photos = new ArrayList<>();
-
+*/
 }

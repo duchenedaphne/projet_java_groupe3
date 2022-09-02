@@ -18,7 +18,7 @@ public class Photo {
 
     @Id @Column(length = 30)
     private String id;
-    private String taille;
+    private String path;
 
     @ManyToOne
     private Habitation habitation;
