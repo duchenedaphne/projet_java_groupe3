@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html 
+    lang="fr"
+    xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Users | Liste</title>
+</head>
+<body>
+    <div layout:fragment="page_content">
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    Liste des utilisateurs
+                </div>
+                
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>id</th>
+                            <th>Prénom</th>
+                            <th>E-mail</th>
+                            <th>Téléphone</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr th:each="u:${users}">
+                            <td th:text="${u.id}"> </td>
+                            <td th:text="${u.prenom}"> </td>
+                            <td th:text="${u.email}"> </td>
+                            <td th:text="${u.phone}"> </td>
+                            <td th:text="${u.role}"></td>
+                            <td>            
+                                <button>
+                                    <a th:href="@{users/update/{id}(id=${u.id})}">Modifier</a>
+                                </button>         
+                                <button>
+                                    <a th:href="@{users/delete/{id}(id=${u.id})}">Supprimer</a>
+                                </button> 
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Ajouter un utilisateur :</h3>
+                    <form th:action="@{users/save}" method="post">
+                        <div class="form-group">
+                            <label for="id">id :</label>
+                            <input type="text" name="id" th:value="${user.id}" id="id" placeholder="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom">Prénom:</label>
+                            <input type="text" name="prenom" id="nom" th:value="${user.prenom}" placeholder="Nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="departement">E-mail :</label>
+                            <input type="email" name="email" id="departement" th:value="${user.email}" placeholder="Département">
+                        </div>
+                        <div class="form-group">
+                            <label for="superficie">Téléphone :</label>
+                            <input type="tel" name="phone" id="superficie" th:value="${user.phone}" placeholder="Superficie">
+                        </div>
+                        <div class="form-group">
+                            <label for="prix">Role :</label>
+                            <input type="text" name="role" id="prix" th:value="${user.role}" placeholder="Prix">
+                        </div>
+                        <input type="submit" value="Ajouter">
+                    </form>
+                        
+                </div>
+            </div>
+        </div>
+      </div>
+</body>
+</html>

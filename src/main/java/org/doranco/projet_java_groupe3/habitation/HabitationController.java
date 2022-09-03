@@ -5,8 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.doranco.projet_java_groupe3.photo.IPhotoService;
 import org.doranco.projet_java_groupe3.photo.Photo;
@@ -32,8 +30,7 @@ public class HabitationController {
     private final IHabitationService habitationService;
     private final IPhotoService photoService;
 
-    // private final String UPLOAD_DIR = "./uploads/";
-    private final String UPLOAD_DIR = "./src/main/resources/static/uploads/";
+    private final String UPLOAD_DIR = "./src/main/resources/static/uploads/habitations/";
     
     public HabitationController(IHabitationService habitationService, 
                                 IPhotoService photoService) {
@@ -63,7 +60,7 @@ public class HabitationController {
         return "habitations";
     }
 
-    @PostMapping(path = "save",produces = "application/json")
+    @PostMapping(path = "save", produces = "application/json")
     public String saveHabitation(
         @ModelAttribute("habitation") Habitation habitation,
         // @ModelAttribute("photo") Photo photo,
@@ -77,7 +74,7 @@ public class HabitationController {
                     Path path = Paths.get(UPLOAD_DIR + fileName);
                     Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-                    habitation.setPhoto(fileName);
+                    habitation.setPhoto("./uploads/habitations/" + fileName);
                     /* 
                     photo.setPath(path.toString());
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html 
+    lang="fr"
+    xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Utilisateur | Update</title>
+</head>
+<body>
+    <div layout:fragment="page_content">
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Modifier l'utilisateur : </h3>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{save}" method="post">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <label for="id">id :</label>
+                            </th>
+                            <th>                                
+                                <label for="nom">Prénom :</label>
+                            </th>
+                            <th> 
+                                <label for="departement">E-mail :</label>
+                            </th>
+                            <th>
+                                <label for="superficie">Téléphone</label></th>
+                            <th>
+                                <label for="prix">Role :</label>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="id" th:value="${user.id}" id="id" readonly="readonly">
+                            </td>
+                            <td>
+                                <input type="text" name="prenom" id="nom" th:value="${user.prenom}">
+                            </td>
+                            <td>
+                                <input type="email" name="email" id="departement" th:value="${user.email}" >
+                            </td>
+                            <td>
+                                <input type="tel" name="phone" id="superficie" th:value="${user.phone}" >
+                            </td>
+                            <td>
+                                <input type="text" name="role" id="prix" th:value="${user.role}">
+                            </td>
+                            <td>
+                                <button type="submit">Modifier</button>              
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

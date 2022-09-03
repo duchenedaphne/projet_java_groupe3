@@ -34,7 +34,7 @@
                         </tr>
                         <tr th:each="h:${habitations}">
                             <td th:text="${h.id}"> </td>
-                            <td><img th:src="@{./uploads/{p}(p=${h.photo})}" alt="photo" width="70px"></td>                        
+                            <td><img th:src="${h.photo}" alt="photo" width="70px"></td>                        
                             <td th:text="${h.nom}"> </td>
                             <td th:text="${h.departement}"> </td>
                             <td th:text="${h.superficie}"> </td>
@@ -78,35 +78,7 @@
                         </div>
                         <input type="submit" value="Ajouter">
                     </form>
-<!--
-                    <button><a th:href="@{habitations/upload}">Ajout Photo</a></button>
--->                        
-<!--
-                    <h3>Ajout Photo :</h3>
-                    <form method="post" th:action="@{habitations/upload}" enctype="multipart/form-data">                                   
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    <label for="photo">Photo :</label>
-                                </th>                            
-                                <th>Actions</th>
-                            </tr>
-                            <tr>
-                            -->
-                                <!-- th:value="${habitation.photo} -->
-                                <!--
-                                <td>
-                                    <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-                                    
-                                    <input type="file" name="file" class="form-control-file"> 
-                                </td>                            
-                                <td>
-                                    <button type="submit" class="btn btn-primary">Ajout</button>             
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
--->
+
                 </div>
             </div>
         </div>

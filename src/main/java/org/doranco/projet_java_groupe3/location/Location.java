@@ -2,15 +2,9 @@ package org.doranco.projet_java_groupe3.location;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 public class Location {

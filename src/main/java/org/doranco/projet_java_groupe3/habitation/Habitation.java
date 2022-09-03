@@ -3,18 +3,11 @@ package org.doranco.projet_java_groupe3.habitation;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import org.doranco.projet_java_groupe3.photo.Photo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 public class Habitation {
