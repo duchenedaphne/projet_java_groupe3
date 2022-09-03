@@ -8,6 +8,8 @@ import java.nio.file.StandardCopyOption;
 
 import org.doranco.projet_java_groupe3.photo.IPhotoService;
 import org.doranco.projet_java_groupe3.photo.Photo;
+import org.doranco.projet_java_groupe3.user.IUserService;
+import org.doranco.projet_java_groupe3.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -28,14 +30,17 @@ import org.springframework.web.multipart.MultipartFile;
 public class HabitationController {
     
     private final IHabitationService habitationService;
+    private final IUserService userService;
     private final IPhotoService photoService;
 
     private final String UPLOAD_DIR = "./src/main/resources/static/uploads/habitations/";
     
     public HabitationController(IHabitationService habitationService, 
-                                IPhotoService photoService) {
+                                IPhotoService photoService,
+                                IUserService userService) {
         this.habitationService = habitationService;
         this.photoService = photoService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -48,10 +53,12 @@ public class HabitationController {
             Page<Habitation> habitations = habitationService.afficherHabitations(PageRequest.of(page,size));
             model.addAttribute("habitations", habitations);
             // model.addAttribute("photos", photos);
+            // model.addAttribute("user", user);
             model.addAttribute("pages", new int[habitations.getTotalPages()]);
             model.addAttribute("current_page", page);
             model.addAttribute("habitation", new Habitation());
             // model.addAttribute("photo", new Photo());
+            model.addAttribute("user", new User());
 
         } catch (Exception e) {
             model.addAttribute("error",e.getMessage());
@@ -64,6 +71,7 @@ public class HabitationController {
     public String saveHabitation(
         @ModelAttribute("habitation") Habitation habitation,
         // @ModelAttribute("photo") Photo photo,
+        @ModelAttribute("user") User user,
         @RequestParam("file") MultipartFile file, RedirectAttributes attributes
         ) {
           
@@ -77,13 +85,9 @@ public class HabitationController {
                     habitation.setPhoto("./uploads/habitations/" + fileName);
                     /* 
                     photo.setPath(path.toString());
-
                     photoService.ajouterPhoto(photo);
-
                     List<Photo> photos = new ArrayList<>();
-
                     photos.add(photo);
-
                     habitation.setPhotos(photos);
                     */
 

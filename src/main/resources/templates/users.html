@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="wusernameth=device-wusernameth, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <title>Users | Liste</title>
@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <table class="table">
                         <tr>
-                            <th>id</th>
+                            <th>Username</th>
                             <th>Prénom</th>
                             <th>E-mail</th>
                             <th>Téléphone</th>
@@ -32,17 +32,17 @@
                             <th>Actions</th>
                         </tr>
                         <tr th:each="u:${users}">
-                            <td th:text="${u.id}"> </td>
+                            <td th:text="${u.username}"> </td>
                             <td th:text="${u.prenom}"> </td>
                             <td th:text="${u.email}"> </td>
                             <td th:text="${u.phone}"> </td>
                             <td th:text="${u.role}"></td>
                             <td>            
                                 <button>
-                                    <a th:href="@{users/update/{id}(id=${u.id})}">Modifier</a>
+                                    <a th:href="@{users/update/{username}(username=${u.username})}">Modifier</a>
                                 </button>         
                                 <button>
-                                    <a th:href="@{users/delete/{id}(id=${u.id})}">Supprimer</a>
+                                    <a th:href="@{users/delete/{username}(username=${u.username})}">Supprimer</a>
                                 </button> 
                             </td>
                         </tr>
@@ -51,24 +51,24 @@
                     <h3>Ajouter un utilisateur :</h3>
                     <form th:action="@{users/save}" method="post">
                         <div class="form-group">
-                            <label for="id">id :</label>
-                            <input type="text" name="id" th:value="${user.id}" id="id" placeholder="id">
+                            <label for="username">username :</label>
+                            <input type="text" name="username" th:value="${user.username}" username="username" placeholder="username">
                         </div>
                         <div class="form-group">
                             <label for="prenom">Prénom:</label>
-                            <input type="text" name="prenom" id="prenom" th:value="${user.prenom}" placeholder="Prénom">
+                            <input type="text" name="prenom" username="prenom" th:value="${user.prenom}" placeholder="Prénom">
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail :</label>
-                            <input type="email" name="email" id="email" th:value="${user.email}" placeholder="E-mail">
+                            <input type="email" name="email" username="email" th:value="${user.email}" placeholder="E-mail">
                         </div>
                         <div class="form-group">
                             <label for="phone">Téléphone :</label>
-                            <input type="tel" name="phone" id="phone" th:value="${user.phone}" placeholder="Téléphone">
+                            <input type="tel" name="phone" username="phone" th:value="${user.phone}" placeholder="Téléphone">
                         </div>
                         <div class="form-group">
                             <label for="role">Rôle :</label>
-                            <input type="text" name="role" id="role" th:value="${user.role}" placeholder="Rôle">
+                            <input type="text" name="role" username="role" th:value="${user.role}" placeholder="Rôle">
                         </div>
                         <input type="submit" value="Ajouter">
                     </form>

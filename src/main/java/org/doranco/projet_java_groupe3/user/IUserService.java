@@ -1,5 +1,6 @@
 package org.doranco.projet_java_groupe3.user;
 
+import org.doranco.projet_java_groupe3.habitation.Habitation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,13 +13,12 @@ public interface IUserService {
 
    public User updateUser(User user) throws Exception;
 
-   public User detailsUser(String id) throws Exception;
+   public User detailsUser(String username) throws Exception;
 
-   public String supprimerUser(String id) throws Exception;
+   public String supprimerUser(String username) throws Exception;
 
    public Page<User> getAllUsers(Pageable pageable) throws Exception;
 
-
-   // public Page<User> afficherUser(PageRequest of) throws Exception;
+   public User addHabitation(Habitation habitation) throws Exception;
 
 }

@@ -2,6 +2,7 @@ package org.doranco.projet_java_groupe3.habitation;
 
 import java.util.Optional;
 
+import org.doranco.projet_java_groupe3.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,15 @@ public class HabitationService implements IHabitationService {
         } else {
             throw new RuntimeException("Aucune habitation trouvée");
         }
+    }
+
+    @Override
+    public Habitation addUser(User user) throws Exception {
+
+        Habitation habitation = new Habitation();
+        habitation.setUser(user);
+        
+        return habitation;
     }
 
 }

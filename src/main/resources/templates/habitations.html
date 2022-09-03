@@ -30,6 +30,7 @@
                             <th>Département</th>
                             <th>m²</th>
                             <th>Prix</th>
+                            <th>Propriétaire</th>
                             <th>Actions</th>
                         </tr>
                         <tr th:each="h:${habitations}">
@@ -39,6 +40,7 @@
                             <td th:text="${h.departement}"> </td>
                             <td th:text="${h.superficie}"> </td>
                             <td th:text="${h.prix}"></td>
+                            <td th:text="${h.user == null ? 'rien' : h.user.username}"></td>
                             <td>            
                                 <button>
                                     <a th:href="@{habitations/update/{id}(id=${h.id})}">Modifier</a>

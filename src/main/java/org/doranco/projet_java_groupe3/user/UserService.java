@@ -1,11 +1,9 @@
 package org.doranco.projet_java_groupe3.user;
 
+import org.doranco.projet_java_groupe3.habitation.Habitation;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService implements IUserService {
@@ -35,16 +33,24 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User detailsUser(String id) {
+    public User detailsUser(String username) {
 
-        return userRepository.findUserById(id);
+        return userRepository.findUserByUsername(username);
     }
 
     @Override
-    public String supprimerUser(String id) {
+    public String supprimerUser(String username) {
         
-        userRepository.deleteById(id);
+        userRepository.deleteById(username);
         return "L'utilisateur a bien été supprimé ";
+    }
+
+    @Override
+    public User addHabitation(Habitation habitation) throws Exception {
+        
+        User user = new User();
+        user.getHabitations().add(habitation);
+        return user;
     }
 
 /*

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // @RequestMapping
 public interface UserRepository extends JpaRepository<User, String> {
 
-    User findUserById(String id);
+    User findUserByUsername(String username);
 
 
 }

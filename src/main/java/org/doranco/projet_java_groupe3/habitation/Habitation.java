@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.doranco.projet_java_groupe3.photo.Photo;
+import org.doranco.projet_java_groupe3.user.User;
 
 import lombok.*;
 
@@ -26,6 +27,9 @@ public class Habitation {
     private String etat;
 
     private String photo;
+
+    @ManyToOne
+    private User user; // => String USER_USERNAME en BDD
 /*
     @OneToMany(mappedBy = "habitation")
     private List<Photo> photos = new ArrayList<>();
