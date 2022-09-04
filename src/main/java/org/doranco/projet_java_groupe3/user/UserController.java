@@ -103,6 +103,41 @@ public class UserController {
         }
         return "redirect:/users";
     }
+    
+    @PostMapping(path = "update/habitation", produces = "application/json")
+    public String saveHabitation(
+
+        @ModelAttribute("habitation") Habitation habitation,
+        @ModelAttribute("user") User user,
+        @RequestParam("file") MultipartFile file, RedirectAttributes attributes
+        ) {
+        try { 
+            if (user != null) {
+                habitation.setUser(user); 
+            }
+            if (!file.isEmpty()) {
+                String fileName = StringUtils.cleanPath(file.getOriginalFilename());    
+                try {
+                    Path path = Paths.get(UPLOAD_DIR + fileName);
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                    habitation.setPhoto("./uploads/habitations/" + fileName);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (habitation != null) {
+                user.getHabitations().add(habitation);
+            }  
+            
+            habitationService.ajouterHabitation(habitation);
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "redirect:/habitations";
+    }
 
     @RequestMapping(path = "delete/{username}")
     public String deleteUser(
@@ -115,42 +150,6 @@ public class UserController {
             throw new RuntimeException(e);
         }
         return "redirect:/users";
-    }
-    
-    @PostMapping(path = "update/habitation", produces = "application/json")
-    public String saveHabitation(
-
-        // /{username} @PathVariable(name = "username") String username,
-        @ModelAttribute("habitation") Habitation habitation,
-        @ModelAttribute("user") User user,
-        @RequestParam("file") MultipartFile file, RedirectAttributes attributes
-        ) {           
-            
-        try { 
-            if (!file.isEmpty()) {
-                String fileName = StringUtils.cleanPath(file.getOriginalFilename());    
-                try {
-                    Path path = Paths.get(UPLOAD_DIR + fileName);
-                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-
-                    habitation.setPhoto("./uploads/habitations/" + fileName);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }  
-            // user = userService.detailsUser(username);
-
-            userService.addHabitation(habitation);
-            userService.saveUser(user);
-
-            habitationService.addUser(user);            
-            habitationService.ajouterHabitation(habitation);
-            
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return "redirect:/habitations";
     }
 
 }

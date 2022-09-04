@@ -24,9 +24,6 @@
                     <form th:action="@{save}" method="post">
                     <table class="table">
                         <tr>
-                            <th>
-                                <label for="id">Id :</label>
-                            </th>
                             <th>                                
                                 <label for="nom">Nom :</label>
                             </th>
@@ -41,9 +38,7 @@
                             <th>Actions</th>
                         </tr>
                         <tr>
-                            <td>
-                                <input type="text" name="id" th:value="${habitation.id}" id="id" placeholder="Id">
-                            </td>
+                            <input type="hidden" name="id" th:value="${habitation.id}" id="id" placeholder="Id">
                             <td> 
                                 <input type="text" name="nom" id="nom" th:value="${habitation.nom}">
                             </td>
