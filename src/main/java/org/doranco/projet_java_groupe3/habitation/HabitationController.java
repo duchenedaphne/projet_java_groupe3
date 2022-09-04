@@ -169,5 +169,16 @@ public class HabitationController {
 
         return "redirect:/habitations";
     }
+
+/*    @RequestMapping("/fhbu/{username}")
+    public String fhbu(@PathVariable(name = "username") String username) {
+        try {
+            habitationService.filtrerHabitationsParUsername(username);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return "f_habitations";
+    }*/
     
 }

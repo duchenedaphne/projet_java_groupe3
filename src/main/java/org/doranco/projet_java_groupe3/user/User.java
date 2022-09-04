@@ -21,42 +21,6 @@ public class User {
     private String password;
     private String role;
 
-    @OneToMany // (mappedBy = "user")
-    @JoinTable(name = "rent", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @OneToMany (mappedBy = "user")
     private List<Habitation> habitations = new ArrayList<>();
-    
-  /*  
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
-    */
-/*
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Authority> authorities;
-*/
-/*
-    public User(String username, String prenom, String email, String phone) {
-        this.username = username;
-        this.prenom=prenom;
-        this.email = email;
-        this.phone = phone;
-        
-        accountNonExpired = true;
-        accountNonLocked = true;
-        credentialsNonExpired = true;
-        enabled = true;
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-        
-        accountNonExpired = true;
-        accountNonLocked = true;
-        credentialsNonExpired = true;
-        enabled = true;
-    }
-    */
-
 }

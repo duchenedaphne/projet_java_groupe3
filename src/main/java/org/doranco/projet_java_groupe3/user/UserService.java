@@ -46,9 +46,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User addHabitation(Habitation habitation) throws Exception {
+    public User addHabitation(Habitation habitation, String username) throws Exception {
         
-        User user = new User();
+        User user = userRepository.findUserByUsername(username);
         user.getHabitations().add(habitation);
         
         return user;

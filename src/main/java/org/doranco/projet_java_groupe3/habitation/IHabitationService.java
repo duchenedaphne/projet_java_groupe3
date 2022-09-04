@@ -23,5 +23,7 @@ public interface IHabitationService {
     public Habitation selectionnerHabitation(String id) throws Exception;
 
     public Habitation addUser(User user) throws Exception;
+
+    // public Habitation filtrerHabitationsParUsername(String username) throws Exception;
     
 }

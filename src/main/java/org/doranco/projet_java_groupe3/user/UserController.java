@@ -119,8 +119,7 @@ public class UserController {
     
     @PostMapping(path = "update/habitation", produces = "application/json")
     public String saveHabitation(
-
-        // /{username} @PathVariable(name = "username") String username,
+        @ModelAttribute("username") String username,
         @ModelAttribute("habitation") Habitation habitation,
         @ModelAttribute("user") User user,
         @RequestParam("file") MultipartFile file, RedirectAttributes attributes
@@ -139,9 +138,9 @@ public class UserController {
                     e.printStackTrace();
                 }
             }  
-            // user = userService.detailsUser(username);
+            user = userService.detailsUser(username);
 
-            userService.addHabitation(habitation);
+            userService.addHabitation(habitation, username);
             userService.saveUser(user);
 
             habitationService.addUser(user);            

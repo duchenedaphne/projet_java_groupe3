@@ -3,6 +3,7 @@ package org.doranco.projet_java_groupe3.habitation;
 import java.util.Optional;
 
 import org.doranco.projet_java_groupe3.user.User;
+import org.doranco.projet_java_groupe3.user.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 public class HabitationService implements IHabitationService {
 
     private final HabitationRepository habitationRepository;
+    private final UserRepository userRepository;
 
-    public HabitationService(HabitationRepository habitationRepository) {
+    public HabitationService(HabitationRepository habitationRepository, UserRepository userRepository) {
         this.habitationRepository = habitationRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -87,5 +90,11 @@ public class HabitationService implements IHabitationService {
         
         return habitation;
     }
+
+/*    @Override
+    public Habitation filtrerHabitationsParUsername(String username) throws Exception {
+        User user = userRepository.findUserByUsername(username);
+        return habitationRepository.findHabitationByUsername(username);
+    }*/
 
 }

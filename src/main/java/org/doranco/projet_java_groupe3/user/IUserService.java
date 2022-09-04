@@ -19,6 +19,6 @@ public interface IUserService {
 
    public Page<User> getAllUsers(Pageable pageable) throws Exception;
 
-   public User addHabitation(Habitation habitation) throws Exception;
+   public User addHabitation(Habitation habitation, String username) throws Exception;
 
 }
