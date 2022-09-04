@@ -52,39 +52,6 @@
                         </tr>
                     </table>
 
-                    <h3>Ajouter une habitation :</h3>                    
-                    <form th:action="@{habitations/save}" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="id">Id :</label>
-                            <input type="text" name="id" th:value="${habitation.id}" id="id" placeholder="Id">
-                        </div>
-                        <div class="form-group">
-                            <label for="nom">Nom :</label>
-                            <input type="text" name="nom" id="nom" th:value="${habitation.nom}" placeholder="Nom">
-                        </div>
-                        <div class="form-group">
-                            <label for="departement">Département :</label>
-                            <input type="number" name="departement" id="departement" th:value="${habitation.departement}" placeholder="Département">
-                        </div>
-                        <div class="form-group">
-                            <label for="superficie">Superficie :</label>
-                            <input type="number" name="superficie" id="superficie" th:value="${habitation.superficie}" placeholder="Superficie">                            
-                        </div>
-                        <div class="form-group">
-                            <label for="prix">Prix :</label>
-                            <input type="number" name="prix" id="prix" th:value="${habitation.prix}" placeholder="Prix">                            
-                        </div>
-                        <div class="form-group">
-                            <label for="photo">Photo :</label>
-                            <input type="file" name="file" class="form-control-file">
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Username :</label>
-                            <input type="text" name="username" id="username" th:value="${habitation.user.username}" placeholder="Username">
-                        </div>
-                        <input type="submit" value="Ajouter">
-                    </form>
-
                 </div>
             </div>
         </div>

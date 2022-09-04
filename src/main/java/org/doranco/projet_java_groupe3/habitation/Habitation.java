@@ -28,8 +28,7 @@ public class Habitation {
 
     private String photo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username")
+    @ManyToOne
     private User user; // => String USER_USERNAME en BDD
 /*
     @OneToMany(mappedBy = "habitation")
