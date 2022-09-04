@@ -24,9 +24,6 @@
                     <form th:action="@{save}" method="post">
                     <table class="table">
                         <tr>
-                            <th>
-                                <label for="username">username :</label>
-                            </th>
                             <th>                                
                                 <label for="nom">Prénom :</label>
                             </th>
@@ -36,14 +33,13 @@
                             <th>
                                 <label for="superficie">Téléphone</label></th>
                             <th>
-                                <label for="prix">Role :</label>
+                                <label for="prix">Rôle :</label>
                             </th>
                             <th>Actions</th>
                         </tr>
                         <tr>
-                            <td>
-                                <input type="text" name="username" th:value="${user.username}" id="username" readonly="readonly">
-                            </td>
+                            <input type="hidden" name="username" th:value="${user.username}" id="username" readonly="readonly">
+                            
                             <td>
                                 <input type="text" name="prenom" id="prenom" th:value="${user.prenom}">
                             </td>
@@ -62,9 +58,9 @@
                         </tr>
                     </table>
                     </form>                     
-                    
+                    <!-- /{username}(username=${user.username} -->
                     <h3>Ajouter une habitation :</h3>                    
-                    <form th:action="@{habitation/{username}(username=${user.username}}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{habitation}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="id">Id :</label>
                             <input type="text" name="id" th:value="${habitation.id}" id="id" placeholder="Id">
@@ -79,16 +75,23 @@
                         </div>
                         <div class="form-group">
                             <label for="superficie">Superficie :</label>
-                            <input type="number" name="superficie" id="superficie" th:value="${habitation.superficie}" placeholder="Superficie">                            
+                            <input type="number" name="superficie" id="superficie" th:value="${habitation.superficie}" placeholder="Superficie">
                         </div>
                         <div class="form-group">
                             <label for="prix">Prix :</label>
-                            <input type="number" name="prix" id="prix" th:value="${habitation.prix}" placeholder="Prix">                            
+                            <input type="number" name="prix" id="prix" th:value="${habitation.prix}" placeholder="Prix">
                         </div>
                         <div class="form-group">
                             <label for="photo">Photo :</label>
                             <input type="file" name="file" class="form-control-file">
                         </div>
+                        
+                            <input type="hidden" name="username" th:value="${user.username}" id="username" readonly="readonly">
+                            <input type="hidden" name="prenom" id="prenom" th:value="${user.prenom}" readonly="readonly">
+                            <input type="hidden" name="email" id="email" th:value="${user.email}" readonly="readonly">
+                            <input type="hidden" name="phone" id="phone" th:value="${user.phone}" readonly="readonly">
+                            <input type="hidden" name="role" id="role" th:value="${user.role}" readonly="readonly">
+                        
                         <input type="submit" value="Ajouter">
                     </form>
                         

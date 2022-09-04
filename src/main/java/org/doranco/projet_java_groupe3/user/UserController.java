@@ -117,10 +117,10 @@ public class UserController {
         return "redirect:/users";
     }
     
-    @PostMapping(path = "update/habitation/{username}", produces = "application/json")
+    @PostMapping(path = "update/habitation", produces = "application/json")
     public String saveHabitation(
 
-        @PathVariable(name = "username") String username,
+        // /{username} @PathVariable(name = "username") String username,
         @ModelAttribute("habitation") Habitation habitation,
         @ModelAttribute("user") User user,
         @RequestParam("file") MultipartFile file, RedirectAttributes attributes
@@ -139,13 +139,12 @@ public class UserController {
                     e.printStackTrace();
                 }
             }  
-            user = userService.detailsUser(username);
+            // user = userService.detailsUser(username);
 
             userService.addHabitation(habitation);
+            userService.saveUser(user);
 
-            habitation.setUser(user);
-            habitationService.addUser(user);
-            
+            habitationService.addUser(user);            
             habitationService.ajouterHabitation(habitation);
             
         } catch (Exception e) {

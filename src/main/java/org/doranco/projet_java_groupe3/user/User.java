@@ -21,7 +21,8 @@ public class User {
     private String password;
     private String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany // (mappedBy = "user")
+    @JoinTable(name = "rent", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Habitation> habitations = new ArrayList<>();
     
   /*  

@@ -50,6 +50,7 @@ public class UserService implements IUserService {
         
         User user = new User();
         user.getHabitations().add(habitation);
+        
         return user;
     }
 
