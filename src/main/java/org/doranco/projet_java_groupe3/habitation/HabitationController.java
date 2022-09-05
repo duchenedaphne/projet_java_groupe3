@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.doranco.projet_java_groupe3.photo.IPhotoService;
-import org.doranco.projet_java_groupe3.photo.Photo;
 import org.doranco.projet_java_groupe3.user.IUserService;
 import org.doranco.projet_java_groupe3.user.User;
 import org.springframework.data.domain.Page;
@@ -25,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-@Controller 
+@Controller
 @RequestMapping("/habitations")
 public class HabitationController {
     
@@ -41,6 +40,11 @@ public class HabitationController {
         this.habitationService = habitationService;
         this.photoService = photoService;
         this.userService = userService;
+    }
+
+    @GetMapping("/index")
+    public String IndexController() {
+        return "index";
     }
 
     @GetMapping

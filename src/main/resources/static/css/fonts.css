@@ -1,0 +1,67 @@
+/* Fonts utilisées pour le site */
+
+@font-face {
+    font-family: EditorialNow;
+    src: url(../fonts/EdiNew/EditorialNew-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: EditorialNow;
+    src: url(../fonts/EdiNew/EditorialNew-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: EditorialNow;
+    src: url(../fonts/EdiNew/EditorialNew-Thin.ttf);
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: EditorialNow;
+    src: url(../fonts/EdiNew/EditorialNew-Ultrabold.ttf);
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: NeueMontreal;
+    src: url(../fonts/NeueMon/NeueMontreal-Regular.ttf);
+}
+
+@font-face {
+    font-family: NeueMontreal;
+    src: url(../fonts/NeueMon/NeueMontreal-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: NeueMontreal;
+    src: url(../fonts/NeueMon/NeueMontreal-BoldItalic.ttf);
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: NeueMontreal;
+    src: url(../fonts/NeueMon/NeueMontreal-Italic.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: NeueMontreal;
+    src: url(../fonts/NeueMon/NeueMontreal-Light.ttf);
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: NeueMontreal;
+    src: url(../fonts/NeueMon/NeueMontreal-LightItalic.ttf);
+    font-weight: lighter;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: MilkAndHoney;
+    src: url(../fonts/MilkHoney/Gatype\ -\ MilkAndHoney-Regular.otf);
+}
