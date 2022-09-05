@@ -51,6 +51,7 @@
                             <td>
                                 <input type="number" name="prix" id="prix" th:value="${habitation.prix}">
                             </td>
+                            <input type="hidden" name="proprietaire" th:value="${habitation.user.username}">
                             <td>
                                 <button type="submit">Modifier</button>              
                             </td>
