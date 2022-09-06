@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html
+        lang="fr"
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout"
+>
+
+<head>
+    <title>Liste habitations</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{https://use.typekit.net/gtr2qpe.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/fonts.css}" />
+    <link rel="stylesheet" th:href="@{/css/img.css}" />
+
+    <!-- JS Libraries -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{https://unpkg.com/splitting/dist/splitting.css}" />
+    <link rel="stylesheet" th:href="@{https://unpkg.com/splitting/dist/splitting-cells.css}" />
+    <script th:src="@{https://unpkg.com/splitting/dist/splitting.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js}"></script>
+    <script th:src="@{/js/anime.min.js}"></script>
+    <script th:src="@{/js/indexAJAX.js}"></script>
+
+</head>
+
+<body>
+<nav class="navigation">
+    <div class="logo_wrapper">
+        <div class="logo_img"></div>
+        <p class="logo__text" data-splitting>mansio*</p>
+    </div>
+    <div class="nav_links_wrapper">
+        <div class="nav_login">
+            <p class="frgament--hidden" th:replace="fragments/confirm :: message"></p>
+            <button onclick="fetchUsers()"
+                class="login_link link_anim admin__nav__link">admin<span class="blink">_</span></button>
+            <p  class="login_link link_anim adminQuit__nav__link">quitter<span class="blink">_</span></p>
+            <a  th:href="@{/users/backoffice}" class="login_link link_anim backOffice">userBackOffice<span class="blink">_</span></a>
+            <p  class="login_link link_anim"><span>C</span>onnexion</p>
+            <button class="button anim_btn signup_btn">
+                <div class="button__bg"></div><span>inscription</span>
+            </button>
+            <button class="button anim_btn ajouterBien_btn">
+                <div class="button__bg"></div><span>Bien++</span>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="overlay">
+    <div class="overlay__row"></div>
+    <div class="overlay__row"></div>
+</div>
+
+<main>
+    <div class="home_wrapper">
+        <div class="banner_wrapper">
+            <div class="banner_title">
+                <div class="banner_wrapper__bg"></div>
+                <h1 class="content__paragraph" data-splitting>
+                    “in vita mansio”
+                </h1>
+                <p class="content__paragraph" data-splitting>— sanctus Robestus</p>
+            </div>
+            <div class="banner_text">
+                <p class="content__paragraphs" data-splitting><span class="banner_text__span">*  mansio</span>, ōnis, f. (maneo)</p>
+                <p class="content__paragraphs" data-splitting>1. action de rester, de demeurer, séjour.</p>
+                <p class="content__paragraphs" data-splitting>2. lieu de séjour, habitation, demeure.</p>
+            </div>
+
+            <div class="home_form_wrapper">
+                <div class="home_form_header"></div>
+                <form class="home_form" method="post" th:action="@{/getAll}">
+                    <div class="home_form_cell">
+                        <label for="lieu">Département</label>
+                        <select name="departement" id="lieu" required>
+                            <option value="" selected>Sélectionnez un lieu</option>
+                            <option value="75">Paris</option>
+                            <option value="77">Seine-et-Marne</option>
+                            <option value="78">Yvelines</option>
+                            <option value="91">Essonne</option>
+                            <option value="92">Hauts-de-Seine</option>
+                            <option value="93">Seine-Saint-Denis</option>
+                            <option value="94">Val-de-Marne</option>
+                            <option value="95">Val-d'Oise</option>
+                        </select>
+                    </div>
+
+                    <div class="home_form_cell">
+                        <label for="surface">Surface</label>
+                        <select name="surface" id="surface" required>
+                            <option value="" selected>Sélectionnez une surface</option>
+                            <option value="petit" data-surface-min="10" data-surface-max="30">10m² — 30m²</option>
+                            <option value="moyen" data-surface-min="30" data-surface-max="70">30m² — 70m²</option>
+                            <option value="grand" data-surface-min="70">70m² et plus</option>
+                        </select>
+                    </div>
+
+                    <div class="home_form_cell">
+                        <label for="prix">Budget</label>
+                        <select name="budget" id="prix" required>
+                            <option value="" selected>Sélectionnez votre budget</option>
+                            <option value="1" data-budget-min="0" data-budget-max="500">0€ — 500€</option>
+                            <option value="2" data-budget-min="550" data-budget-max="1000">500€ — 1000€</option>
+                            <option value="3" data-budget-min="1000">1000€ et plus</option>
+                        </select>
+                    </div>
+
+                    <div class="home_form_cell">
+                        <button class="button anim_btn search_btn firstClick" type="submit">
+                            <div class="button__bg"></div><span>Rechercher</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="habitat_list_wrapper">
+
+        <div class="mansio__category">
+            <div class="mansio__category__cell">
+                <p class="link_anim">à louer</p>
+            </div>
+            <div class="mansio__category__cell">
+                <p class="link_anim">mes propriétés</p>
+            </div>
+            <div class="mansio__category__cell">
+                <p class="link_anim">mes locations</p>
+            </div>
+        </div>
+        <div class="mansio_card_wrapper">
+            <div th:each="h:${habitations}" class="mansio_card">
+                <div class="mansio_card_img">
+                    <div class="mansio_card_img_inner "></div>
+                </div>
+                <h2 th:text="${h.nom}" class="mansio_card__title"></h2>
+                <div class="mansio_card_surface-prix">
+                    <p class="home_surface"><span th:text="${h.superficie}"></span> m²</p>
+                    <p class="home_price"><span th:text="${h.prix}"></span>€/mois</p>
+                </div>
+                <div class="home_hyphen__close">
+                    <p class="home_hyphen"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin__wrapper">
+        <div class="home_wrapper">
+            <h1 class="admin__title" data-splitting>administration<span class="blink">_</span></h1>
+        </div>
+        <div class="admin_list_wrapper">
+            <div class="admin__menu">
+                <p class="admin__menu__link link_anim user__link"><span>></span> utilisateurs</p>
+                <p class="admin__menu__link link_anim estate__link"><span>></span> propriétés</p>
+            </div>
+
+            <div class="admin__users__list" >
+                <div th:each="u:${users}" class="admin__user__entry">
+                    <div class="admin__user__entry__cell">
+                        <label for="usernameCell">username</label>
+                        <input type="text" th:value="${u.username}" id="usernameCell" name="username" readonly>
+                    </div>
+                    <div class="admin__user__entry__cell">
+                        <label for="prenom">prénom</label>
+                        <input type="text" id="prenom" name="prenom" readonly th:value="${u.prenom}">
+                    </div>
+                    <div class="admin__user__entry__cell">
+                        <label for="email">e-mail</label>
+                        <input type="text" id="email" name="email" readonly th:value="${u.email}">
+                    </div>
+                    <div class="admin__user__entry__cell">
+                        <label for="phone">téléphone</label>
+                        <input type="text" id="phone" name="phone" readonly th:value="${u.phone}">
+                    </div>
+                    <div class="admin__user__entry__cell">
+                        <label for="role">rôle</label>
+                        <input type="text" id="role" name="role" readonly th:value="${u.role}">
+                    </div>
+
+                    <div class="admin__user__entry__cell">
+                        <button class="button anim_btn admin__btn--voir">
+                            <div class="button__bg"></div><span>voir plus</span>
+                        </button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="drawer signup__drawer">
+        <p class="drawer__close"></p>
+        <h2>Locataires<br>
+            <span class="span--blue span--first">—</span> <span class="span--blue">—</span> <span class="span--blue">—</span> <br>
+            <span class="span--white">—</span> <span class="span--white">—</span> <span class="span--white">—</span> <br>
+            Propriétaires
+        </h2>
+
+        <h3>Rejoignez-nous.</h3>
+        <form class="signup_form" th:action="@{users/save}" method="post" th:object="${user}">
+            <div class="input__wrapper">
+                <label for="nomSU">Username</label>
+                <input type="text" id="nomSU" name="nom" required th:field="*{username}">
+            </div>
+
+            <div class="input__wrapper">
+                <label for="nom">Prénom</label>
+                <input type="text" id="nom" name="nom" required th:field="*{prenom}">
+            </div>
+
+            <div class="input__wrapper">
+                <label for="emailSU">Email</label>
+                <input type="email" id="emailSU" name="email" required th:field="*{email}">
+            </div>
+            <div class="input__wrapper">
+                <label for="tel">Téléphone</label>
+                <input type="tel" id="tel" name="telephone" required th:field="*{phone}">
+            </div>
+
+
+            <button class="button anim_btn signup__form_btn finalSubmit" type="submit" onclick="addUser()">
+                <div class="button__bg"></div><span>s'inscrire</span>
+            </button>
+        </form>
+    </section>
+
+    <section class="drawer bien__drawer">
+        <p class="drawer__close"></p>
+        <h3>Ajoutez un bien.</h3>
+        <form class="ajouterHabitation_form" th:action="@{habitations/save}" method="post" th:object="${habitation}">
+            <div class="input__wrapper">
+                <label for="idAH">ID</label>
+                <input type="text" id="idAH" name="id" required th:field="*{id}">
+            </div>
+
+            <div class="input__wrapper">
+                <label for="nomAH">nom</label>
+                <input type="text" id="nomAH" name="nom" required th:field="*{nom}">
+            </div>
+
+            <div class="input__wrapper">
+                <label for="departementAH">Département</label>
+                <input type="number" id="departementAH" name="departement" required th:field="*{departement}">
+            </div>
+            <div class="input__wrapper">
+                <label for="superficieAH">Superficie</label>
+                <input type="number" id="superficieAH" name="superficie" required th:field="*{superficie}">
+            </div>
+            <div class="input__wrapper">
+                <label for="prixAH">Prix</label>
+                <input type="number" id="prixAH" name="prix" required th:field="*{prix}">
+            </div>
+
+            <button class="button anim_btn ajouterHabitation__btn finalSubmit" type="submit" onclick="addHabitation()">
+                <div class="button__bg"></div><span>ajouter</span>
+            </button>
+        </form>
+    </section>
+
+    <section class="user__see-more">
+        <div class="user__see-more__content">
+            <p class="drawer__close"></p>
+            <form th:action="@{users/save}" method="post" th:object="${user}">
+                <div class="user__see-more__first">
+                    <input type="text" th:value="${user.username}" name="username" readonly>
+                    <p class="user__see-more--update link_anim">Modifier</p>
+                    <input class="user__see-more__first--confirm" type="submit" value="Valider">
+                </div>
+                <input type="text" th:name="prenom" readonly th:value="${user.prenom}" >
+                <input type="email" th:name="email" readonly th:value="${user.email}" >
+                <input type="tel" th:name="phone" readonly th:value="${user.phone}" >
+                <input type="text" th:name="role" readonly th:value="${user.role}" >
+            </form>
+            <div class="user__see-more__rents">
+                <div class="user__see-more__renting">
+                    <h2 class="user__see-more__renting--title">Locations en cours</h2>
+                    <p class="user__see-more__renting--none">Aucune location en cours.</p>
+                </div>
+                <div class="user__see-more__rented">
+                    <h2 class="user__see-more__rented--title">Propriétés en location</h2>
+                    <p class="user__see-more__rented--none">Aucune propriété à louer.</p>
+                </div>
+            </div>
+            <div class="user__see-more__delete__wrapper">
+                <button th:href="@{users/delete/{username}(username=${user.username})}" class="user__see-more__delete link_anim">Supprimer l'utilisateur</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Custom JS Scripts -->
+<script th:src="@{/js/anims/indexAnim.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+
+</body>
+</html>

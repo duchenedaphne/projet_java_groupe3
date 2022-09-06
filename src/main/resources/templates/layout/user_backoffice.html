@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+        lang="fr"
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="wusernameth=device-wusernameth, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Users | Liste</title>
+</head>
+<body>
+<div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Liste des utilisateurs
+            </div>
+
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th>Username</th>
+                        <th>Prénom</th>
+                        <th>E-mail</th>
+                        <th>Téléphone</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr th:each="u:${users}">
+                        <td th:text="${u.username}"> </td>
+                        <td th:text="${u.prenom}"> </td>
+                        <td th:text="${u.email}"> </td>
+                        <td th:text="${u.phone}"> </td>
+                        <td th:text="${u.role}"></td>
+                        <td>
+                            <button>
+                                <a th:href="@{/users/update/{username}(username=${u.username})}">Modifier</a>
+                            </button>
+                            <button>
+                                <a th:href="@{/users/delete/{username}(username=${u.username})}">Supprimer</a>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

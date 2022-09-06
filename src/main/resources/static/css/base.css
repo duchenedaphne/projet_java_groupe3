@@ -19,12 +19,19 @@
     font-family: NeueMontreal, Arial, Helvetica, sans-serif;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
 body {
     background-color: var(--anthracite);
     color: var(--primary-color);
     overflow-x: hidden;
     overflow-y: hidden;
     height: 100vh;
+    position: fixed;
 }
 
 .link_anim {
@@ -59,6 +66,13 @@ body {
     transform: scale3d(1, 1, 1);
 }
 
+.fragment--hidden { opacity: 0 }
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
 /*============================================================================
 
                                  NAVIGATION
@@ -74,16 +88,14 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    margin-top: 5vh;
+    padding-top: 5vh;
 }
 
 
 .logo_wrapper {
     margin-left: 5vw;
+    cursor: pointer;
 }
-
-
-
 
 .logo__text {
     font-family: freight-big-pro, serif;
@@ -128,13 +140,6 @@ body {
     will-change: transform;
 }
 
-
-
-
-
-
-
-
 .nav_links_wrapper {
     height: 100%;
 
@@ -168,154 +173,6 @@ body {
     border-right: 0;
 }
 
-.signup_drawer {
-    width: 30vw;
-    height: 100vh;
-    position: fixed;
-    top: -5vh;
-    right: 0;
-
-    background-color: var(--secondary-color);
-    z-index: 999;
-
-    transform: translateX(30vw);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.drawer__close {
-    cursor: pointer;
-    margin-bottom: 5vh;
-    margin-left: 25vw;
-    position: relative;
-    width: 25px;
-    height: 5px;
-
-    transition: all ease-out 0.2s;
-}
-
-.drawer__close:before {
-    content: '';
-    width: 25px;
-    height: 5px;
-    background-color: var(--bleu-canard);
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    transform: rotate(45deg);
-    transition: all ease-out 0.2s;
-}
-
-.drawer__close:after {
-    content: '';
-    width: 25px;
-    height: 5px;
-    background-color: var(--bleu-canard);
-    position: absolute;
-    bottom: 0;
-    right: 0;
-
-    transform: rotate(135deg);
-    transition: all ease-out 0.2s;
-}
-
-.drawer__close:hover {
-    transform: rotate(180deg);
-}
-
-.signup_drawer h2 {
-    font-size: 2.2vw;
-    text-align: center;
-
-    margin-bottom: 5vh;
-}
-
-.signup_drawer h2 .span--blue {
-    display: inline-block;
-    color: var(--bleu-canard);
-    transform: rotate(45deg);
-}
-
-.signup_drawer h2 .span--white {
-    display: inline-block;
-    transform: rotate(45deg);
-}
-
-.color--blue {
-    color: var(--bleu-canard);
-}
-
-.signup_drawer h3 {
-    font-size: 1.5vw;
-    text-align: center;
-
-    margin-bottom: 5vh;
-    position: relative;
-}
-
-.signup_drawer h3:after {
-    content: '';
-    width: 100%;
-    height: 5px;
-    background-color: var(--bleu-canard);
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-}
-
-.signup_drawer form {
-    /* regarder la page d'accueil de Twitter */
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 80%;
-}
-
-.signup_drawer .input__wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.signup_drawer label {
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.signup_drawer input {
-    width: 100%;
-    height: 50px;
-
-    color: var(--primary-color);
-    font-size: 1.5vw;
-    font-weight: bold;
-
-    background-color: transparent;
-    border-radius: 4px;
-    border: 1px solid var(--bleu-canard);
-
-    margin-bottom: 3vh;
-    padding-left: 10px;
-    box-sizing: border-box;
-}
-
-.signup_drawer .signup__form_btn {
-    width: 100%;
-    height: 50px;
-}
-
-.signup__form_btn:hover .button__bg {
-    transform: scale3d(1,1,1) !important;
-}
-
 /*============================================================================
                                  NAVIGATION/LINK_ANIM
 ============================================================================*/
@@ -345,6 +202,10 @@ body {
 }
 
 .login_link {
+    margin-right: 2vw;
+}
+
+.ajouterBien_btn {
     margin-right: 2vw;
 }
 
@@ -455,9 +316,11 @@ body {
 
 main {
     width: 100vw;
+    height: 90vw;
     padding: 0 5vw;
     box-sizing: border-box;
     overflow: hidden;
+    position: relative;
 }
 
 /*============================================================================
@@ -631,8 +494,6 @@ main {
     padding: 20px 30px;
 }
 
-
-
 /*============================================================================
 ============================================================================*/
 
@@ -670,25 +531,30 @@ main {
 
 ============================================================================*/
 
-.habitat_list_wrapper {
-    position: relative;
-}
-
 .mansio_list {
     position: relative;
 }
 
 .habitat_list_wrapper {
     width: 100%;
-    margin-top: 15vh;
+    height: fit-content;
+    margin-top: 25vh;
+    position: relative;
+
+    opacity: 0;
 }
 
 .mansio_card_wrapper {
     width: 100%;
+    height: fit-content;
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
 }
 
 .mansio_card_wrapper div:last-child {
@@ -696,11 +562,62 @@ main {
 }
 
 .mansio_card {
-    width: 24%;
+    min-width: 25vw;
     height: 55vh;
     margin-right: 20px;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    position: relative;
+}
+
+.home_hyphen__close {
+    width: 25px;
+    height: 5px;
+
+    position: fixed;
+    top: 20vh;
+    right: 2vw;
+
+    display: none;
+}
+
+.home_hyphen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    transition: all ease-out 0.2s;
+}
+
+.home_hyphen:before {
+    content: '';
+    width: 25px;
+    height: 5px;
+    background-color: var(--bleu-canard);
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    transform: rotate(45deg);
+    transition: all ease-out 0.2s;
+}
+
+.home_hyphen:after {
+    content: '';
+    width: 25px;
+    height: 5px;
+    background-color: var(--bleu-canard);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    transform: rotate(135deg);
+    transition: all ease-out 0.2s;
+}
+
+.drawer__close:hover {
+    transform: rotate(180deg);
 }
 
 .mansio_card_img {
@@ -762,6 +679,37 @@ main {
                                     ADMIN PANEL
 
 ============================================================================*/
+.admin__wrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    opacity: 0;
+}
+
+.admin__nav__link,
+.adminQuit__nav__link,
+.user__see-more__delete{
+    font-weight: bold;
+    cursor: pointer;
+
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.backOffice {
+    font-weight: bold !important;
+    font-size: 0.8vw !important;
+    padding-bottom: 5px;
+    text-transform: none !important;
+}
+
+.adminQuit__nav__link {
+    display: none;
+}
+
 .admin__wrapper .banner_wrapper {
     height: 15vh;
 }
@@ -772,7 +720,10 @@ main {
     font-size: 2.5vw;
 }
 
-.admin__wrapper .admin__title .blink {
+.admin__wrapper .admin__title .blink,
+.admin__nav__link .blink,
+.adminQuit__nav__link .blink,
+.backOffice .blink{
     animation:
             blink-underscore 1s step-end infinite;
 }
@@ -813,7 +764,11 @@ main {
 
 .admin__users__list {
     width: calc(75vw - 50px);
+    height: 61vh;
     margin-top: 3.5vh;
+
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
 }
 
 .admin__user__entry {
@@ -857,23 +812,223 @@ main {
     transform: scale3d(1,1,1) !important;
 }
 
+
 /*============================================================================
 
-                                    ADMIN PANEL/DRAWER
+                                    OVERLAY / TRANSITION
 
 ============================================================================*/
 
-.user__see-more {
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    pointer-events: none;
+    grid-template-rows: repeat(2,1fr);
+    z-index: 100000;
+
+    opacity: 1;
+}
+
+.overlay__row {
+    background: var(--secondary-color);
+    transform: scaleY(0);
+    will-change: transform;
+}
+
+.overlay__row:first-child {
+    transform-origin: 50% 0%;
+}
+
+.overlay__row:last-child {
+    transform-origin: 50% 100%;
+}
+
+/*============================================================================
+
+                                 GLOBAL / DRAWERS
+
+============================================================================*/
+/*============================================================================
+                                 DRAWER / CLOSE
+============================================================================*/
+.drawer__close {
+    cursor: pointer;
+    margin-bottom: 5vh;
+    margin-left: 25vw;
+    position: relative;
+    width: 25px;
+    height: 5px;
+
+    transition: all ease-out 0.2s;
+}
+
+.drawer__close:before {
+    content: '';
+    width: 25px;
+    height: 5px;
+    background-color: var(--bleu-canard);
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    transform: rotate(45deg);
+    transition: all ease-out 0.2s;
+}
+
+.drawer__close:after {
+    content: '';
+    width: 25px;
+    height: 5px;
+    background-color: var(--bleu-canard);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    transform: rotate(135deg);
+    transition: all ease-out 0.2s;
+}
+
+.drawer__close:hover {
+    transform: rotate(180deg);
+}
+
+
+/*============================================================================
+                                 DRAWER / SIGN UP
+============================================================================*/
+
+.drawer {
     width: 30vw;
     height: 100vh;
     position: fixed;
-    top: -5vh;
+    top: 0;
     right: 0;
 
     background-color: var(--secondary-color);
     z-index: 999;
 
     transform: translateX(30vw);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+}
+
+.drawer h2 {
+    font-size: 2.2vw;
+    text-align: center;
+
+    margin-bottom: 5vh;
+}
+
+.drawer h2 .span--blue {
+    display: inline-block;
+    color: var(--bleu-canard);
+    transform: rotate(45deg);
+}
+
+.drawer h2 .span--white {
+    display: inline-block;
+    transform: rotate(45deg);
+}
+
+.color--blue {
+    color: var(--bleu-canard);
+}
+
+.drawer h3 {
+    font-size: 1.5vw;
+    text-align: center;
+
+    margin-bottom: 5vh;
+    position: relative;
+}
+
+.drawer h3:after {
+    content: '';
+    width: 100%;
+    height: 5px;
+    background-color: var(--bleu-canard);
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+}
+
+.drawer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+}
+
+.drawer .input__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer label {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.drawer input {
+    width: 100%;
+    height: 50px;
+
+    color: var(--primary-color);
+    font-size: 1.5vw;
+    font-weight: bold;
+
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid var(--bleu-canard);
+
+    margin-bottom: 3vh;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.drawer .signup__form_btn,
+.drawer .ajouterHabitation__btn{
+    width: 100%;
+    height: 50px;
+}
+
+.signup__form_btn:hover .button__bg,
+.ajouterHabitation__btn:hover .button__bg {
+    transform: scale3d(1,1,1) !important;
+}
+
+
+
+/*============================================================================
+                                    ADMIN PANEL/DRAWER
+============================================================================*/
+
+.user__see-more {
+    width: 30vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    background-color: var(--secondary-color);
+    z-index: 999;
+
+    transform: translateX(30vw);
+    opacity: 0;
 }
 
 .user__see-more__content {
@@ -987,6 +1142,8 @@ main {
 .user__see-more__delete {
     font-size: 1.5vw;
     font-weight: bold;
+    text-decoration: none;
+    color: var(--primary-color);
 
     cursor: pointer;
 }
