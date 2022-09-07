@@ -134,8 +134,20 @@
                 <p class="link_anim">mes locations</p>
             </div>
         </div>
-        <div class="mansio_card_wrapper" th:replace="fragments/mansio_cards :: wrapper">
-
+        <div class="mansio_card_wrapper">
+            <div th:each="h:${habitations}" class="mansio_card">
+                <div class="mansio_card_img">
+                    <div class="mansio_card_img_inner "></div>
+                </div>
+                <h2 th:text="${h.nom}" class="mansio_card__title"></h2>
+                <div class="mansio_card_surface-prix">
+                    <p class="home_surface"><span th:text="${h.superficie}"></span> m²</p>
+                    <p class="home_price"><span th:text="${h.prix}"></span>€/mois</p>
+                </div>
+                <div class="home_hyphen__close">
+                    <p class="home_hyphen"></p>
+                </div>
+            </div>
         </div>
     </div>
 
