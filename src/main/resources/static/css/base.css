@@ -626,7 +626,7 @@ main {
     overflow: hidden;
     border-radius: 16px;
 
-    cursor: pointer;
+    cursor: grab;
 }
 
 .mansio_card_img_inner {
@@ -634,11 +634,15 @@ main {
     height: 100%;
     border-radius: 16px;
 
-    cursor: pointer;
+    cursor: grab;
 
     box-shadow: -2px -1px 136px -45px rgba(0,0,0,0.75) inset;
     -webkit-box-shadow: -2px -1px 136px -45px rgba(0,0,0,0.75) inset;
     -moz-box-shadow: -2px -1px 136px -45px rgba(0,0,0,0.75) inset;
+}
+
+.active {
+    cursor: grabbing;
 }
 
 .mansio_card__title {
