@@ -1,6 +1,7 @@
+/*
 package org.doranco.projet_java_groupe3.controller;
 
-import org.springframework.security.core.Authentication;
+// import org.springframework.security.core.Authentication;
 import org.doranco.projet_java_groupe3.dao.UserRepository;
 import org.doranco.projet_java_groupe3.models.User;
 import org.springframework.stereotype.Controller;
@@ -128,3 +129,5 @@ public class AuthController {
         return "redirect:/registerSuccessful";
     }
 }
+*/
+

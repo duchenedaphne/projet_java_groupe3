@@ -1,7 +1,7 @@
 package org.doranco.projet_java_groupe3.models;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
