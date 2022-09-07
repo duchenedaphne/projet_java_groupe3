@@ -58,7 +58,41 @@ public class HabitationController {
             throw new RuntimeException(e);
         }
 
-        return "habitationsD";
+        return "habitationD";
+    }
+
+    @GetMapping("/refresh")
+    public String getHabitationsRefresh(Model model) {
+
+        try {
+            List<Habitation> habitations = habitationService.afficherHabitations();
+            model.addAttribute("habitations", habitations);
+            model.addAttribute("habitation", new Habitation());
+            model.addAttribute("user", new User());
+
+        } catch (Exception e) {
+            model.addAttribute("error",e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return "fragments/mansio_cards :: wrapper";
+    }
+
+    @GetMapping("/backoffice")
+    public String getHabitationsBO(Model model) {
+
+        try {
+            List<Habitation> habitations = habitationService.afficherHabitations();
+            model.addAttribute("habitations", habitations);
+            model.addAttribute("habitation", new Habitation());
+            model.addAttribute("user", new User());
+
+        } catch (Exception e) {
+            model.addAttribute("error",e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return "layout/habit_backoffice";
     }
 
     @PostMapping(path = "save", produces = "application/json")
@@ -101,20 +135,19 @@ public class HabitationController {
     }
 
     @RequestMapping(path = "update/{id}")
-    public ModelAndView updateHabitation(
-        @PathVariable(name = "id") String id
+    public String updateHabitationGoToPage(
+        @PathVariable(name = "id") String id,
+        Model model
     ) {
         try {
-            ModelAndView modelAndView = new ModelAndView("hupdate");
-
             Habitation habitation = habitationService.detailsHabitation(id);
-            modelAndView.addObject("habitation", habitation);
-
-            return modelAndView;
+            model.addAttribute("habitation", habitation);
             
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        return "layout/hupdate";
     }
     
     @PostMapping(path = "update/save", produces = "application/json")
@@ -127,7 +160,7 @@ public class HabitationController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "redirect:/habitations";
+        return "redirect:/habitations/backoffice";
     }
 
     @RequestMapping(path = "delete/{id}")
@@ -140,7 +173,7 @@ public class HabitationController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "redirect:/habitations";
+        return "redirect:/habitations/backoffice";
     }
 
     @PostMapping(path = "upload")

@@ -16,6 +16,23 @@ const fetchBuilding = () => {
     })
 }
 
+const refreshBuilding = () => {
+    console.log('boop');
+    let form = $('.home_form');
+    form.on('submit', (e) => {
+        e.preventDefault();
+        $.ajax({
+            method: 'GET',
+            url: form.attr('action'),
+            success: (fragment) => {
+                console.log('refresh buildings fetched from database')
+                $('.mansio_card_wrapper').replaceWith(fragment);
+            },
+            error: console.log('error refreshing buildings from database')
+        })
+    })
+}
+
 console.log('indexAJAX.js loaded');
 
 const addUser = () => {
@@ -51,4 +68,5 @@ const addHabitation = () => {
 
 $('.signup__form_btn').click(addUser());
 $('.ajouterHabitation__btn').click(addHabitation());
+$('.refreshMansio').click(refreshBuilding());
 $('.admin__nav__link').click(fetchUsers());

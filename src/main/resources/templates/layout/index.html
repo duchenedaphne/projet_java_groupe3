@@ -39,12 +39,10 @@
                 class="login_link link_anim admin__nav__link">admin<span class="blink">_</span></button>
             <p  class="login_link link_anim adminQuit__nav__link">quitter<span class="blink">_</span></p>
             <a  th:href="@{/users/backoffice}" class="login_link link_anim backOffice">userBackOffice<span class="blink">_</span></a>
+            <a  th:href="@{/habitations/backoffice}" class="login_link link_anim backOffice">habitationBackOffice<span class="blink">_</span></a>
             <p  class="login_link link_anim"><span>C</span>onnexion</p>
             <button class="button anim_btn signup_btn">
                 <div class="button__bg"></div><span>inscription</span>
-            </button>
-            <button class="button anim_btn ajouterBien_btn">
-                <div class="button__bg"></div><span>Bien++</span>
             </button>
         </div>
     </div>
@@ -113,6 +111,11 @@
                             <div class="button__bg"></div><span>Rechercher</span>
                         </button>
                     </div>
+                    <div class="home_form_cell">
+                        <button class="button anim_btn search_btn ajouterBien_btn" type="submit" onclick="addHabitation()">
+                            <div class="button__bg"></div><span>Nouveau</span>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -131,20 +134,8 @@
                 <p class="link_anim">mes locations</p>
             </div>
         </div>
-        <div class="mansio_card_wrapper">
-            <div th:each="h:${habitations}" class="mansio_card">
-                <div class="mansio_card_img">
-                    <div class="mansio_card_img_inner "></div>
-                </div>
-                <h2 th:text="${h.nom}" class="mansio_card__title"></h2>
-                <div class="mansio_card_surface-prix">
-                    <p class="home_surface"><span th:text="${h.superficie}"></span> m²</p>
-                    <p class="home_price"><span th:text="${h.prix}"></span>€/mois</p>
-                </div>
-                <div class="home_hyphen__close">
-                    <p class="home_hyphen"></p>
-                </div>
-            </div>
+        <div class="mansio_card_wrapper" th:replace="fragments/mansio_cards :: wrapper">
+
         </div>
     </div>
 

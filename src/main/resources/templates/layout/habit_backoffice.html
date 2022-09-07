@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+        lang="fr"
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Habitations | Liste</title>
+</head>
+<body>
+<div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                A louer
+            </div>
+
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Photo</th>
+                        <th>Nom</th>
+                        <th>Département</th>
+                        <th>m²</th>
+                        <th>Prix</th>
+                        <th>Propriétaire</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr th:each="h:${habitations}">
+                        <td th:text="${h.id}"> </td>
+                        <td><img th:src="${h.photo}" alt="photo" width="70px"></td>
+                        <td th:text="${h.nom}"> </td>
+                        <td th:text="${h.departement}"> </td>
+                        <td th:text="${h.superficie}"> </td>
+                        <td th:text="${h.prix}"></td>
+                        <td th:text="${h.user == null ? 'rien' : h.user.username}"></td>
+                        <td>
+                            <button>
+                                <a th:href="@{/habitations/update/{id}(id=${h.id})}">Modifier</a>
+                            </button>
+                            <button>
+                                <a th:href="@{/habitations/delete/{id}(id=${h.id})}">Supprimer</a>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

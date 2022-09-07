@@ -1,6 +1,7 @@
 package org.doranco.projet_java_groupe3.models;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -22,4 +23,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Habitation> habitations = new ArrayList<>();
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

@@ -1,4 +1,4 @@
-package org.doranco.projet_java_groupe3.obj_config;
+package org.doranco.projet_java_groupe3.config;
 
 import org.doranco.projet_java_groupe3.dao.UserRepository;
 import org.doranco.projet_java_groupe3.models.User;
